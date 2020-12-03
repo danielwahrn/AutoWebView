@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AutoWebView</string>
+    <string name="url_hint">Input URL</string>
+</resources>
