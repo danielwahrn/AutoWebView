@@ -1,4 +1,4 @@
-package com.example.autowebview;
+package com.muhanad.autowebview;
 
 import org.junit.Test;
 

@@ -1,24 +1,17 @@
-package com.example.autowebview;
+package com.muhanad.autowebview;
 
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Canvas;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-import androidx.browser.customtabs.CustomTabsIntent;
 
 public class WebViewActivity extends Activity {
     CountDownTimer downTimer;

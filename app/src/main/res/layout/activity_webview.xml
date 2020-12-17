@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBlack"
     android:orientation="vertical"
-    tools:context="com.example.autowebview.WebViewActivity">
+    tools:context="com.muhanad.autowebview.WebViewActivity">
 
     <WebView
         android:id="@+id/webView"

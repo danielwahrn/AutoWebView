@@ -1,4 +1,4 @@
-package com.example.autowebview;
+package com.muhanad.autowebview;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
@@ -19,20 +18,21 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.browser.customtabs.CustomTabsIntent;
 
 
 public class MainActivity extends Activity {
     Button btnEnter;
     Button btnStop;
-    ImageButton btnExit;
+    ImageButton btnExit, btnSetting;
     EditText edURLName;
     TextView txtTimer;
     CountDownTimer downTimer;
+    FrameLayout loading;
     SharedPreferences sharedPreferences;
 //    private HomeKeyLocker mHomeKeyLocker;
 
@@ -52,10 +52,11 @@ public class MainActivity extends Activity {
     }
 
     private void initCountDownTimer() {
-        downTimer  = new CountDownTimer(10000, 1000) {
+        downTimer  = new CountDownTimer(5000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                txtTimer.setText(""+ millisUntilFinished / 1000);
+//                txtTimer.setText(""+ millisUntilFinished / 1000);
+                loading.setVisibility(View.VISIBLE);
             }
 
             public void onFinish()
@@ -71,7 +72,9 @@ public class MainActivity extends Activity {
         btnEnter = findViewById(R.id.btn_Enter);
         btnStop = findViewById(R.id.btn_Stop);
         btnExit = findViewById(R.id.btn_Exit);
-
+        btnSetting = findViewById(R.id.btn_setting);
+        loading = findViewById(R.id.loading);
+        loading.setVisibility(View.GONE);
         txtTimer = findViewById(R.id.txt_Timer);
 
         edURLName = findViewById(R.id.ed_URL_Name);
@@ -105,6 +108,14 @@ public class MainActivity extends Activity {
                downTimer.cancel();
             }
 
+        });
+
+        btnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                downTimer.cancel();
+                startActivity(new Intent(MainActivity.this, SettingActivity.class));
+            }
         });
 
         edURLName.addTextChangedListener(new TextWatcher() {
@@ -151,7 +162,8 @@ public class MainActivity extends Activity {
 
     }
     private void gotoWebViewPage() {
-        String url = edURLName.getText().toString();
+        Setting setting = new Setting(getBaseContext());
+        String url = setting.getURL();
 
 //                webView.getSettings().setLoadsImagesAutomatically(true);
 //                webView.getSettings().setJavaScriptEnabled(true);
@@ -162,7 +174,7 @@ public class MainActivity extends Activity {
 ///chrome view
 //        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 //        startActivity(browserIntent);
-
+        loading.setVisibility(View.GONE);
         Intent browserIntent = new Intent(this, WebViewActivity.class);
         browserIntent.putExtra("uri", url);
         startActivity(browserIntent);

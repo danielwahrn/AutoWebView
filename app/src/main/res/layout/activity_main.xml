@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.example.autowebview.MainActivity">
+    tools:context="com.muhanad.autowebview.MainActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -28,10 +28,26 @@
         android:background="@color/colorWhite"
         android:textColor="@color/colorBlack"
         android:inputType="textUri"
+        android:visibility="gone"
         android:autofillHints="@string/url_hint"
         android:hint="@string/url_hint"
         />
-
+    <FrameLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="400dp">
+        <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.Small.FadingCircle"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginBottom="5dp"
+            app:SpinKit_Color="@color/colorWhite" />
+    </FrameLayout>
 
     <Button
         android:layout_width="wrap_content"
@@ -42,6 +58,7 @@
         android:layout_marginTop="80dp"
         android:layout_gravity="center"
         android:background="@color/colorPrimary"
+        android:visibility="gone"
         android:textColor="#ffffff"
         />
 
@@ -54,6 +71,7 @@
         android:layout_marginTop="30dp"
         android:layout_gravity="center"
         android:background="@color/colorPrimary"
+        android:visibility="gone"
         android:textColor="#ffffff"
         />
     <TextView
@@ -65,21 +83,38 @@
         android:textColor="@color/colorWhite"
         android:textSize="34sp" />
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content" >
-        <ImageButton
-            android:id="@+id/btn_Exit"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@null"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/app_name"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/exit" />
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <ImageButton
+                android:id="@+id/btn_setting"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:contentDescription="@string/app_name"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_settings" />
+            <ImageButton
+                android:id="@+id/btn_Exit"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@null"
+                android:contentDescription="@string/app_name"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/exit" />
+
+        </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>
 
