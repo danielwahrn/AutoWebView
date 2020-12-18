@@ -31,6 +31,6 @@ public class Setting {
         editor.commit();
     }
 
-    public String getURL() { return pref.getString("url", "https://portal.avemeo.sk/box/macrosoft");}
+    public String getURL() { return pref.getString("url", "https://www.aljazeera.net/");}
 
 }

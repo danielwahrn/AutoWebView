@@ -20,18 +20,6 @@
         android:contentDescription="@string/app_name"
         android:src="@mipmap/logo" />
 
-    <EditText
-        android:id="@+id/ed_URL_Name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:background="@color/colorWhite"
-        android:textColor="@color/colorBlack"
-        android:inputType="textUri"
-        android:visibility="gone"
-        android:autofillHints="@string/url_hint"
-        android:hint="@string/url_hint"
-        />
     <FrameLayout
         android:id="@+id/loading"
         android:layout_width="match_parent"
@@ -48,40 +36,6 @@
             android:layout_marginBottom="5dp"
             app:SpinKit_Color="@color/colorWhite" />
     </FrameLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter"
-        android:textSize="50dp"
-        android:id="@+id/btn_Enter"
-        android:layout_marginTop="80dp"
-        android:layout_gravity="center"
-        android:background="@color/colorPrimary"
-        android:visibility="gone"
-        android:textColor="#ffffff"
-        />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stop"
-        android:textSize="50dp"
-        android:id="@+id/btn_Stop"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center"
-        android:background="@color/colorPrimary"
-        android:visibility="gone"
-        android:textColor="#ffffff"
-        />
-    <TextView
-        android:id="@+id/txt_Timer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:textColor="@color/colorWhite"
-        android:textSize="34sp" />
 
     <FrameLayout
         android:layout_width="match_parent"

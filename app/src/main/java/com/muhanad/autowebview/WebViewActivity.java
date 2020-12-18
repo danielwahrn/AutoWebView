@@ -22,10 +22,10 @@ public class WebViewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
 
-        initComponents();
-        
         initSettings();
-        
+        initComponents();
+
+
         Bundle bundle = getIntent().getExtras();
         String uri = bundle.getString("uri");
         webView.getSettings().setLoadsImagesAutomatically(true);

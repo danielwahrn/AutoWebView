@@ -24,16 +24,14 @@ import android.widget.TextView;
 
 import androidx.browser.customtabs.CustomTabsIntent;
 
+import com.github.ybq.android.spinkit.SpinKitView;
+
 
 public class MainActivity extends Activity {
-    Button btnEnter;
-    Button btnStop;
     ImageButton btnExit, btnSetting;
-    EditText edURLName;
-    TextView txtTimer;
-    CountDownTimer downTimer;
-    FrameLayout loading;
+    SpinKitView spinner;
     SharedPreferences sharedPreferences;
+    CountDownTimer downTimer;
 //    private HomeKeyLocker mHomeKeyLocker;
 
     @Override
@@ -55,8 +53,7 @@ public class MainActivity extends Activity {
         downTimer  = new CountDownTimer(5000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-//                txtTimer.setText(""+ millisUntilFinished / 1000);
-                loading.setVisibility(View.VISIBLE);
+                spinner.setVisibility(View.VISIBLE);
             }
 
             public void onFinish()
@@ -69,27 +66,14 @@ public class MainActivity extends Activity {
 
     private void initComponents() {
 
-        btnEnter = findViewById(R.id.btn_Enter);
-        btnStop = findViewById(R.id.btn_Stop);
         btnExit = findViewById(R.id.btn_Exit);
         btnSetting = findViewById(R.id.btn_setting);
-        loading = findViewById(R.id.loading);
-        loading.setVisibility(View.GONE);
-        txtTimer = findViewById(R.id.txt_Timer);
-
-        edURLName = findViewById(R.id.ed_URL_Name);
-        edURLName.setText("https://portal.avemeo.sk/box/macrosoft");
+        spinner = findViewById(R.id.spin_kit);
 
     }
 
     private void initListeners() {
-        btnEnter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gotoWebViewPage();
-            }
 
-        });
 
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,15 +81,6 @@ public class MainActivity extends Activity {
                 downTimer.cancel();
                 finish();
                 moveTaskToBack(true);
-            }
-
-        });
-
-        btnStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-               downTimer.cancel();
             }
 
         });
@@ -118,45 +93,22 @@ public class MainActivity extends Activity {
             }
         });
 
-        edURLName.addTextChangedListener(new TextWatcher() {
-             @Override
-             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-             }
-
-             @Override
-             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                 if(downTimer != null) {
-                     downTimer.cancel();
-                 }
-             }
-
-             @Override
-             public void afterTextChanged(Editable s) {
-                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                 String str = s.toString();
-                 editor.putString("savedUri", s.toString());
-                 editor.commit();
-
-             }
-         }
-
-        );
     }
 
     private void initSetting() {
 
-        CustomTabsIntent builder = new CustomTabsIntent.Builder().build();
-        builder.intent.putExtra(Intent.EXTRA_DONT_KILL_APP, true);
-        builder.intent.putExtra(CustomTabsIntent.EXTRA_ENABLE_URLBAR_HIDING, true);
-
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        String savedUri = sharedPreferences.getString("savedUri", "https://portal.avemeo.sk/box/macrosoft");
-        edURLName.setText(savedUri);
-
-        final ComponentName component = new ComponentName(this, WebViewActivity.class);
-        this.getPackageManager().setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, PackageManager.DONT_KILL_APP);
+//        CustomTabsIntent builder = new CustomTabsIntent.Builder().build();
+//        builder.intent.putExtra(Intent.EXTRA_DONT_KILL_APP, true);
+//        builder.intent.putExtra(CustomTabsIntent.EXTRA_ENABLE_URLBAR_HIDING, true);
+//
+//        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//
+//        String savedUri = sharedPreferences.getString("savedUri", "https://portal.avemeo.sk/box/macrosoft");
+//        edURLName.setText(savedUri);
+//
+//        final ComponentName component = new ComponentName(this, WebViewActivity.class);
+//        this.getPackageManager().setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, PackageManager.DONT_KILL_APP);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 
@@ -165,41 +117,24 @@ public class MainActivity extends Activity {
         Setting setting = new Setting(getBaseContext());
         String url = setting.getURL();
 
-//                webView.getSettings().setLoadsImagesAutomatically(true);
-//                webView.getSettings().setJavaScriptEnabled(true);
-//                webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-//                webView.loadUrl(url);
         if (!url.startsWith("http://") && !url.startsWith("https://"))
             url = "https://" + url;
-///chrome view
-//        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-//        startActivity(browserIntent);
-        loading.setVisibility(View.GONE);
+        spinner.setVisibility(View.GONE);
         Intent browserIntent = new Intent(this, WebViewActivity.class);
         browserIntent.putExtra("uri", url);
         startActivity(browserIntent);
 
     }
 
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK) {///disable back button
-            Log.d("Test", "Back button pressed!");
-            return false;
-        }
-
-        return super.onKeyDown(keyCode, event);
-    }
-
     @Override
     protected void onPause() {
         super.onPause();
-// disable recent button
-        ActivityManager activityManager = (ActivityManager) getApplicationContext()
-                .getSystemService(Context.ACTIVITY_SERVICE);
-
-        activityManager.moveTaskToFront(getTaskId(), 0);
+//// disable recent button
+//        ActivityManager activityManager = (ActivityManager) getApplicationContext()
+//                .getSystemService(Context.ACTIVITY_SERVICE);
+//
+//        activityManager.moveTaskToFront(getTaskId(), 0);
+        downTimer.cancel();
     }
 
 }
