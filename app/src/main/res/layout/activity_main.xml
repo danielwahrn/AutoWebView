@@ -18,7 +18,7 @@
         android:layout_marginTop="50dp"
         android:background="#000C0C0C"
         android:contentDescription="@string/app_name"
-        android:src="@mipmap/logo" />
+        android:src="@drawable/logo" />
 
     <FrameLayout
         android:id="@+id/loading"
@@ -65,7 +65,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 android:layout_marginLeft="30dp"
-                android:src="@mipmap/exit" />
+                android:src="@drawable/exit" />
 
         </LinearLayout>
     </FrameLayout>
